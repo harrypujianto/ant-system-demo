@@ -73,8 +73,8 @@ classdef Ant < handle
             r = isempty( find( obj.TabuList == 0, 1 ) ) ~= 1;
         end
         
-        function rtao = updatePheromones(obj, rho, tao, Q, distances)
-            rtao = rho .* tao;
+        function rtao = updatePheromones(obj, tao, Q, distances)
+            rtao = tao;
             
             stepDistances = zeros(length(obj.Steps), 1);
             for i = 1 : length(obj.Steps)
@@ -87,9 +87,6 @@ classdef Ant < handle
                rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue(i); 
                rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue(i); 
             end
-            
-            rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue(i); 
-            rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue(i); 
         end
     end
 end
