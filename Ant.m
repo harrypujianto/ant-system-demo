@@ -34,6 +34,10 @@ classdef Ant < handle
             while obj.notAllVisited()
               obj.nextCity(tao, alpha, eta, beta);
             end
+   
+            lastCity = find(obj.TabuList == max(obj.TabuList));
+            firstCity = find(obj.TabuList == min(obj.TabuList));
+            obj.Steps = [obj.Steps; lastCity, firstCity];
         end
         
         function nextCity(obj, tao, alpha, eta, beta)
@@ -83,6 +87,9 @@ classdef Ant < handle
                rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue(i); 
                rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue(i); 
             end
+            
+            rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue(i); 
+            rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue(i); 
         end
     end
 end
