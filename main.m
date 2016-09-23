@@ -5,19 +5,19 @@ berlin52 = [565 575; 25 185; 345 750; 945 685; 845 655; 880 660; 25 230; 525 100
 cities = berlin52;
 
 %euclidean distance antar kota (kota i,j)
-distances = squareform(pdist(cities));
+distances = round( squareform(pdist(cities)) );
 
 eta = 1 ./ distances;
 
 %inisialisasi konstanta
 alpha = 1;
 beta = 2;
-rho = 0.5;
-Q = 10;
+rho = 0.99;
+Q = 100;
 
-max_cycle = length(cities) * length(cities);
-init_tao = 0;
-ant_quantity = length(cities);
+max_cycle = 1500;
+init_tao = 0.1;
+ant_quantity = 100;
 
 %inisialisasi tao kota i,j
 tao = eye(length(cities));
