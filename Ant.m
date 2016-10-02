@@ -22,6 +22,7 @@ classdef Ant < handle
         function randomStartPosition(obj)
             emptyTabuList(obj);
             r = floor( rand() * length(obj.Cities) ) + 1;
+            %r = 1;
             obj.TabuList(r) = 1;
         end
         
@@ -61,8 +62,7 @@ classdef Ant < handle
             %pemilihan sesuai probabilitas
             c = cumsum(probabilities);
             r = rand();
-            cc = c(c > r);
-            
+            cc = c(c >= r);
             chosenCity = notVisitedCity( c == cc(1) );
             chosenCity = chosenCity(1);
             obj.TabuList(chosenCity) = currentStep + 1;
@@ -81,11 +81,11 @@ classdef Ant < handle
                stepDistances(i) = distances(obj.Steps(i,1), obj.Steps(i,2)); 
             end
            
-            updateValue = Q ./ stepDistances;
+            updateValue = Q / sum(stepDistances);
             
             for i = 1 : length(obj.Steps)
-               rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue(i); 
-               rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue(i); 
+               rtao(obj.Steps(i,1), obj.Steps(i,2)) = rtao(obj.Steps(i,1), obj.Steps(i,2)) + updateValue; 
+               rtao(obj.Steps(i,2), obj.Steps(i,1)) = rtao(obj.Steps(i,2), obj.Steps(i,1)) + updateValue; 
             end
         end
     end

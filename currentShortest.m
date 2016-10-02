@@ -9,8 +9,8 @@ function [steps, distance] = currentShortest( ants, distances )
     end
     
     totalDistances = sum(stepDistances);
-    
     distance = min(totalDistances);
+    
     shortestAnt = find( totalDistances == distance );
     shortestAnt = shortestAnt(1);
     
