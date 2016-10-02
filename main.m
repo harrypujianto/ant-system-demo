@@ -11,8 +11,8 @@ eta = 1 ./ distances;
 
 %inisialisasi konstanta
 alpha = 1;
-beta = 2;
-rho = 0.5;
+beta = 5;
+rho = 0.6;
 Q = 10;
 
 max_cycle = length(cities) * length(cities);
