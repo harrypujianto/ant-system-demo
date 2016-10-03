@@ -22,7 +22,7 @@ function varargout = demo(varargin)
 
 % Edit the above text to modify the response to help demo
 
-% Last Modified by GUIDE v2.5 03-Oct-2016 12:45:43
+% Last Modified by GUIDE v2.5 03-Oct-2016 20:58:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -303,9 +303,10 @@ function pushbutton3_Callback(hObject, eventdata, handles)
     ant_quantity = str2double(get(handles.edit5, 'string'));
     max_cycle = str2double(get(handles.edit6, 'string'));
     init_tao = str2double(get(handles.edit7, 'string'));
+    elit_ant = str2double(get(handles.edit9, 'string'));
     cities = csvread(fname);
     set(handles.chkFinishNow, 'Value', 1);
-    main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hObject, handles)
+    main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elit_ant, hObject, handles)
 
 
 % --- Executes on button press in pushbutton4.
@@ -314,3 +315,26 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 	set(handles.chkFinishNow, 'Value', 0);
+
+
+
+function edit9_Callback(hObject, eventdata, handles)
+% hObject    handle to edit9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit9 as text
+%        str2double(get(hObject,'String')) returns contents of edit9 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit9_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

@@ -22,7 +22,6 @@ classdef Ant < handle
         function randomStartPosition(obj)
             emptyTabuList(obj);
             r = floor( rand() * length(obj.Cities) ) + 1;
-%             r = 1;
             obj.TabuList(r) = 1;
         end
         

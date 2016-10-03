@@ -1,4 +1,4 @@
-function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hObject, handles)
+function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elit_ant, hObject, handles)
     %euclidean distance antar kota (kota i,j)
     distances = round( squareform(pdist(cities)) );
     eta = 1 ./ distances;
@@ -8,15 +8,6 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hO
     drawnow;
     
     rng('shuffle');
-    %inisialisasi konstanta
-%     alpha = 1;
-%     beta = 2;
-%     rho = 0.8;
-%     Q = 100;
-
-%     max_cycle = length(cities) ^ 2;
-%     init_tao = 0.1;
-%     ant_quantity = length(cities);
 
     %inisialisasi tao kota i,j
     tao = eye(length(cities));
@@ -60,7 +51,7 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hO
         end
         
         %elitist ant          
-        updateValue = 8 * Q / distance;
+        updateValue = elit_ant * Q / distance;
 
         for i = 1 : length(steps)
            tao(steps(i,1), steps(i,2)) = tao(steps(i,1), steps(i,2)) + updateValue; 
@@ -74,21 +65,6 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hO
         result_distances(cycle) = stdDistances;
 
         if mod(cycle, 10) == 0
-%             close
-%             f = figure('Position',[10000,10000,1000,1000]);
-%             movegui(f,'southeast');
-%             subplot(2,1,1);  
-%             plot(best_distances)
-%             axis([0 cycle min(best_distances(best_distances > 0))-100 max(best_distances(2:end))+100])
-%             title('Best distance')
-%     
-%             subplot(2,1,2) 
-%             plot(result_distances)    
-%             axis([0 cycle min(best_distances(result_distances > 0))-100 max(result_distances(2:end))+100])
-%             title('Best distance at every cycle') 
-%             
-%             drawnow            handles = guidata(hObject);
-
             cla;
             
             plot(1:cycle, best_distances(1:cycle), 'parent', handles.axes1);
@@ -123,19 +99,6 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, hO
 
         cycle = cycle + 1;
     end
-
-%     close
-%     f = figure('Position',[10000,10000,1000,1000]);
-%     movegui(f,'southeast');
-%     subplot(2,1,1);  
-%     plot(best_distances)
-%     axis([0 cycle min(best_distances(best_distances > 0))-100 max(best_distances(2:end))+100])
-%     title('Best distance')
-% 
-%     subplot(2,1,2) 
-%     plot(result_distances)    
-%     axis([0 cycle min(best_distances(result_distances > 0))-100 max(result_distances(2:end))+100])
-%     title('Best distance at every cycle') 
 
     plot(1:cycle, best_distances(1:cycle), 'parent', handles.axes1);
     axis([0 cycle min(best_distances(best_distances > 0))-100 max(best_distances(2:end))+100]);
