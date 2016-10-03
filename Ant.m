@@ -22,7 +22,7 @@ classdef Ant < handle
         function randomStartPosition(obj)
             emptyTabuList(obj);
             r = floor( rand() * length(obj.Cities) ) + 1;
-            %r = 1;
+%             r = 1;
             obj.TabuList(r) = 1;
         end
         
@@ -49,20 +49,20 @@ classdef Ant < handle
             
             currentCity = find(obj.TabuList == currentStep);
             notVisitedCity = find(obj.TabuList == 0);
-                       
+            
             probabilities = (tao(currentCity, notVisitedCity) .^ alpha) .* (eta(currentCity, notVisitedCity) .^ beta);
             
-            
-            if sum(probabilities) ~= 0
-                probabilities = probabilities ./ sum(probabilities);
+            sum_p = sum(probabilities);
+            if sum_p ~= 0
+                probabilities = probabilities ./ sum_p;
             else
                 probabilities = ones(length(probabilities), 1) ./ length(probabilities);
             end
             
             %pemilihan sesuai probabilitas
             c = cumsum(probabilities);
-            r = rand();
-            cc = c(c >= r);
+            rn = rand();
+            cc = c(c >= rn);
             chosenCity = notVisitedCity( c == cc(1) );
             chosenCity = chosenCity(1);
             obj.TabuList(chosenCity) = currentStep + 1;
@@ -74,7 +74,7 @@ classdef Ant < handle
         end
         
         function rtao = updatePheromones(obj, tao, Q, distances)
-            rtao = tao;
+            rtao = zeros(size(tao));
             
             stepDistances = zeros(length(obj.Steps), 1);
             for i = 1 : length(obj.Steps)

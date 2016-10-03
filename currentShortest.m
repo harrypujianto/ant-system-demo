@@ -1,4 +1,4 @@
-function [steps, distance] = currentShortest( ants, distances )
+function [steps, distance, shortestAnt] = currentShortest( ants, distances )
     
     stepDistances = zeros( length(distances), length(ants) );
    
