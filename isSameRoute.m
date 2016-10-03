@@ -5,10 +5,13 @@ function isSameRoute = isSameRoute( ants )
     
     for i = 2:length(ants)
        route2 = ants(i).TabuList;
-       if isequal(route, route2) == 0
+       idx = find(route2 == route(1));
+       route2 = [route2(idx:end); route2(1:idx-1)];
+        if isequal(route, route2) == 0
            isSameRoute = 0;
            break
-       end
+        end
+
     end
 
 end
