@@ -1,4 +1,4 @@
-function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elite_ant, hObject, handles)
+function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elit_ant, hObject, handles)
     %euclidean distance antar kota (kota i,j)
     distances = round( squareform(pdist(cities)) );
     eta = 1 ./ distances;
@@ -19,8 +19,8 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, el
     for i = 1 : length(ants)
         ants(i) = Ant(cities);
         % random ant
-        % ants(i).randomStartPosition();
-        % sebar ant di masing - masing kota
+%         ants(i).randomStartPosition();
+        % letakkan ant di masing - masing k
         ants(i).TabuList( mod(i-1,length(cities))+1 ) = 1;
     end
 
@@ -53,7 +53,7 @@ function main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, el
         end
         
         %elitist ant          
-        updateValue = elite_ant * Q / distance;
+        updateValue = elit_ant * Q / distance;
 
         for i = 1 : length(steps)
            tao(steps(i,1), steps(i,2)) = tao(steps(i,1), steps(i,2)) + updateValue; 

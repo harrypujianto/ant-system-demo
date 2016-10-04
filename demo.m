@@ -303,10 +303,10 @@ function pushbutton3_Callback(hObject, eventdata, handles)
     ant_quantity = str2double(get(handles.edit5, 'string'));
     max_cycle = str2double(get(handles.edit6, 'string'));
     init_tao = str2double(get(handles.edit7, 'string'));
-    elit_ant = str2double(get(handles.edit9, 'string'));
+    elite_ant = str2double(get(handles.edit9, 'string'));
     cities = csvread(fname);
     set(handles.chkFinishNow, 'Value', 1);
-    main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elit_ant, hObject, handles)
+    main(cities, alpha, beta, rho, Q, ant_quantity, max_cycle, init_tao, elite_ant, hObject, handles)
 
 
 % --- Executes on button press in pushbutton4.
